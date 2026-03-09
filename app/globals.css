@@ -1,6 +1,133 @@
+/* ─── GOOGLE FONTS ────────────────────────────────────────────────────────── */
+@import url("https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap");
+
+
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
+
+
+
+/* ─── TAILWIND V4 THEME TOKENS ────────────────────────────────────────────── */
+@theme {
+  /* --- Fonts --- */
+  --font-display: "Syne", sans-serif;
+  --font-sans:    "DM Sans", sans-serif;
+  --font-mono:    "JetBrains Mono", monospace;
+
+  /* --- Brand Core --- */
+  --color-brand:          #00E5FF; /* electric cyan — primary accent          */
+  --color-brand-dim:      #00E5FF1A; /* 10% opacity fill                      */
+  --color-brand-border:   #00E5FF40; /* 25% opacity border                    */
+  --color-brand-glow:     #00E5FF66; /* text-shadow / box-shadow glow         */
+
+  /* --- Surface Scale (dark → light) --- */
+  --color-base:           #080A0F; /* page background                         */
+  --color-surface:        #0D1117; /* card / section background               */
+  --color-surface-hi:     #131920; /* hover state surface                     */
+  --color-surface-top:    #1A2230; /* highest surface (tooltips, popovers)    */
+
+  /* --- Border Scale --- */
+  --color-line:           #1E2733; /* default border                          */
+  --color-line-hi:        #2A3547; /* hover / focus border                    */
+
+  /* --- Text Scale --- */
+  --color-ink:            #F0F4F8; /* primary text                            */
+  --color-ink-muted:      #8A9BB0; /* secondary text                          */
+  --color-ink-faint:      #4A5568; /* placeholder / disabled                  */
+
+  /* --- Service Accent Palette --- */
+  /* Web Solutions — electric cyan (matches brand) */
+  --color-svc-web:        #00E5FF;
+  --color-svc-web-dim:    #00E5FF14;
+  --color-svc-web-border: #00E5FF33;
+
+  /* Mobile Apps — violet blue */
+  --color-svc-mobile:        #818CF8;
+  --color-svc-mobile-dim:    #818CF814;
+  --color-svc-mobile-border: #818CF833;
+
+  /* Data Analytics — emerald */
+  --color-svc-data:        #10D9A0;
+  --color-svc-data-dim:    #10D9A014;
+  --color-svc-data-border: #10D9A033;
+
+  /* Social Media — amber gold */
+  --color-svc-social:        #F5A623;
+  --color-svc-social-dim:    #F5A62314;
+  --color-svc-social-border: #F5A62333;
+
+  /* AI Automation — soft purple */
+  --color-svc-ai:        #C084FC;
+  --color-svc-ai-dim:    #C084FC14;
+  --color-svc-ai-border: #C084FC33;
+
+  /* --- Keyframe animations --- */
+  --animate-pulse-glow: pulse-glow 5s ease-in-out infinite;
+  --animate-float:      float 4s ease-in-out infinite;
+  --animate-scan:       scan 8s linear infinite;
+  --animate-blink:      blink 1s step-end infinite;
+  --animate-marquee:    marquee 28s linear infinite;
+}
+
+/* ─── KEYFRAMES ───────────────────────────────────────────────────────────── */
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50%       { opacity: 0.75; transform: scale(1.04); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+@keyframes scan {
+  0%   { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* ─── BASE RESET & GLOBALS ────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: var(--color-base);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* Noise texture overlay */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* Scrollbar */
+::-webkit-scrollbar       { width: 4px; }
+::-webkit-scrollbar-track { background: var(--color-base); }
+::-webkit-scrollbar-thumb { background: var(--color-brand-glow); border-radius: 2px; }
+
+/* Selection */
+::selection { background: var(--color-brand-dim); color: var(--color-brand); }
+
 
 @custom-variant dark (&:is(.dark *));
 
