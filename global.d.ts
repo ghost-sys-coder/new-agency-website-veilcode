@@ -89,3 +89,20 @@ interface PricingTier {
   cta:        string;
   featured:   boolean;
 }
+
+
+// start page
+interface WizardData {
+  /* Step 1 */
+  service:     string;
+  /* Step 2 */
+  budget:      string;
+  timeline:    string;
+  /* Step 3 */
+  name:        string;
+  email:       string;
+  company:     string;
+  /* Step 4 */
+  description: string;
+  goals:       string[];
+}

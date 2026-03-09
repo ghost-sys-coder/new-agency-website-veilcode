@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { LogoMark, WordMark, PrimaryButton } from "@/components/extras/Primitives";
+import { LogoMark, WordMark } from "@/components/extras/Primitives";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { MobileDrawer } from "../extras/MobileDrawer";
@@ -73,15 +74,20 @@ function HamburgerButton({
 
 
 export function Nav() {
+  const pathname = usePathname();
+
   const [scrolled,  setScrolled]  = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
+  
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
+  
+  if (pathname === "/start") return null;
+  
   return (
     <>
       <motion.header
@@ -111,9 +117,15 @@ export function Nav() {
 
         {/* Right side actions */}
         <div className="flex items-center gap-3">
-          <PrimaryButton className="hidden md:inline-flex py-2.5! px-5! text-[13px]!">
+          <Link href="/start"
+            className="hidden md:inline-flex items-center gap-1.5
+              font-sans text-[13px] font-medium px-5 py-2.5 rounded-lg
+              border border-brand text-brand no-underline
+              hover:bg-brand hover:text-base
+              hover:shadow-[0_0_20px_var(--color-brand-glow)]
+              transition-all duration-200">
             Start a Project →
-          </PrimaryButton>
+          </Link>
 
           {/* Hamburger — visible on mobile only */}
           <div className="md:hidden">
