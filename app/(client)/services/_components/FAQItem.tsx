@@ -27,10 +27,10 @@ export function FaqItem({
           outline-none group focus-visible:outline-none
           focus-visible:ring-2 focus-visible:ring-brand
           focus-visible:ring-offset-2 focus-visible:ring-offset-surface
-          rounded-sm"
+          rounded-sm overflow-hidden"
       >
-        <span className={`font-sans text-[15px] font-medium leading-snug
-          transition-colors duration-200
+        <span className={`w-[90%] md:flex-1 text-wrap font-sans text-[15px] font-medium leading-snug
+          transition-colors wrap-break-words duration-200
           ${isOpen ? "text-brand" : "text-ink group-hover:text-ink"}`}>
           {faq.q}
         </span>
