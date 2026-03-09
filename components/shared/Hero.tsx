@@ -6,6 +6,7 @@ import { PrimaryButton, GhostButton, GridBg, GlowOrb, AccentLine } from "@/compo
 import { fadeUp, stagger } from "@/lib/motion";
 import { StatItem } from "../extras/StatItem";
 import { STATS, TYPEWRITER_WORDS } from "@/constants";
+import Link from "next/link";
 
 
 function useTypewriter(words: readonly string[]) {
@@ -88,7 +89,7 @@ export function Hero() {
               shadow-[0_0_8px_var(--color-brand)]
               animate-[pulse-glow_2s_ease-in-out_infinite]" />
             <span className="font-mono text-[11px] tracking-[0.12em] uppercase text-brand">
-              Available for new projects · 2025
+              Available for new projects · 2026
             </span>
           </div>
         </motion.div>
@@ -149,10 +150,10 @@ export function Hero() {
           className="flex flex-wrap items-center gap-4 mb-20"
         >
           <PrimaryButton className="text-[15px]! px-8! py-4!">
-            Start a Project →
+            <Link href="/start">Start a Project →</Link>
           </PrimaryButton>
           <GhostButton className="text-[15px]! px-8! py-4!">
-            View Our Work
+            <Link href="/work">View Our Work</Link>
           </GhostButton>
         </motion.div>
 

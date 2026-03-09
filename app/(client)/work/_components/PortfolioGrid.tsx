@@ -8,7 +8,6 @@ import { WorkFilters } from "./WorkFilters";
 import { FeaturedCard } from "./FeaturedCard";
 import { ProjectCard } from "./ProjectCard";
 
-/* ─── EMPTY STATE ─────────────────────────────────────────────────────────── */
 
 function EmptyState({ filter }: { filter: FilterKey }) {
   return (
@@ -33,7 +32,6 @@ function EmptyState({ filter }: { filter: FilterKey }) {
   );
 }
 
-/* ─── PORTFOLIO GRID ──────────────────────────────────────────────────────── */
 
 export function PortfolioGrid() {
   const [activeFilter, setActiveFilter] = useState<FilterKey>("all");

@@ -103,7 +103,7 @@ export function MobileDrawer({
                   className="w-full justify-center py-3!"
                   onClick={onClose}
                 >
-                  Start a Project →
+                  <Link href={"/start"}>Start a Project →</Link>
                 </PrimaryButton>
               </motion.div>
               <p className="text-center font-mono text-[10px] tracking-widest uppercase text-ink-faint mt-4">

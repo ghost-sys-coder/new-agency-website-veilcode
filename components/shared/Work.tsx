@@ -9,6 +9,7 @@ import {
 import { fadeUp, stagger, useReveal } from "@/lib/motion";
 import { PROJECTS } from "@/constants";
 import { ProjectCard } from "../extras/ProjectCard";
+import Link from "next/link";
 
 
 export function Work() {
@@ -44,7 +45,9 @@ export function Work() {
             </motion.h2>
 
             <motion.div variants={fadeUp(0.18)}>
-              <GhostButton>View All Projects →</GhostButton>
+              <GhostButton>
+                <Link href={"/work"}>View All Projects →</Link>
+              </GhostButton>
             </motion.div>
           </div>
         </motion.div>

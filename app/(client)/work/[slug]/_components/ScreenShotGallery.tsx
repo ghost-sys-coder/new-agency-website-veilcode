@@ -7,7 +7,6 @@ import { fadeUp, stagger, useReveal } from "@/lib/motion";
 import { ScreenshotPlaceholder } from "./CaseStudyHero";
 import type { Project, ProjectScreenshot } from "@/constants/projects";
 
-/* ─── SINGLE SCREENSHOT ───────────────────────────────────────────────────── */
 
 function Shot({
   shot,
@@ -24,13 +23,13 @@ function Shot({
     return (
       <figure className="w-full">
         <div className="relative w-full overflow-hidden rounded-xl border border-line
-          bg-surface-hi min-h-60">
+          bg-surface-hi min-h-60 max-w-5xl mx-auto">
           <Image
             src={shot.src}
             alt={shot.alt}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 800px"
-            className="object-cover object-top"
+            className="object-contain object-fill"
           />
         </div>
         <figcaption className="mt-2.5 font-sans text-xs text-ink-faint text-center">
@@ -95,17 +94,6 @@ export function ScreenshotGallery({ project: p }: { project: Project }) {
           <motion.div variants={fadeUp()}>
             <SectionTag>Project Screenshots</SectionTag>
             <AccentLine />
-            <p className="font-sans text-[15px] text-ink-muted mb-12 max-w-130">
-              Replace the placeholders below by dropping your screenshots into{" "}
-              <code className="font-mono text-[13px] text-brand bg-brand-dim
-                px-1.5 py-0.5 rounded">
-                /public/work/{p.slug}/
-              </code>
-              {" "}and setting <code className="font-mono text-[13px] text-brand
-                bg-brand-dim px-1.5 py-0.5 rounded">src</code> in{" "}
-              <code className="font-mono text-[13px] text-brand bg-brand-dim
-                px-1.5 py-0.5 rounded">lib/projects.ts</code>.
-            </p>
           </motion.div>
 
           {/* Gallery */}
@@ -124,7 +112,7 @@ export function ScreenshotGallery({ project: p }: { project: Project }) {
                 <motion.div
                   key={gi}
                   variants={fadeUp(gi * 0.07)}
-                  className="grid grid-cols-1 sm:grid-cols-2 gap-6"
+                  className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-5xl mx-auto"
                 >
                   {group.shots.map((shot, si) => (
                     <Shot

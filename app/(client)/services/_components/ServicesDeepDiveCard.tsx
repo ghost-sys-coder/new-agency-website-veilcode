@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { PrimaryButton, GhostButton } from "@/components/extras/Primitives";
 import { fadeUp, stagger, useReveal } from "@/lib/motion";
+import Link from "next/link";
 
 
 export function ServiceDeepDiveCard({
@@ -156,10 +157,10 @@ export function ServiceDeepDiveCard({
             className="flex flex-wrap items-center gap-4"
           >
             <PrimaryButton className="text-[14px]! px-7! py-3.5!">
-              Start a {data.title} Project →
+              <Link href="/start">Start a {data.title} Project →</Link>
             </PrimaryButton>
             <GhostButton className="text-[14px]! px-7! py-3.5!">
-              See Related Work
+              <Link href={"/work"}>See Related Work</Link>
             </GhostButton>
           </motion.div>
         </motion.div>
