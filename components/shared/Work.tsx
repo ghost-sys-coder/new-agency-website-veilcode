@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   SectionTag,
@@ -9,7 +10,6 @@ import {
 import { fadeUp, stagger, useReveal } from "@/lib/motion";
 import { PROJECTS } from "@/constants";
 import { ProjectCard } from "../extras/ProjectCard";
-import Link from "next/link";
 
 
 export function Work() {

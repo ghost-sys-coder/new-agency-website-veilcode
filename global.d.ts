@@ -12,24 +12,6 @@ interface TeamMember {
   avatarBg:    string;
 }
 
-interface Project {
-  tag:         string;
-  title:       string;
-  desc:        string;
-  metric:      string;
-  metricLabel: string;
-  projectUrl?: string;
-  githubUrl?: string;
-  classes: {
-    tag:        string;
-    metric:     string;
-    orb:        string;
-    innerOrb:   string;
-    hoverBorder:string;
-    hoverShadow:string;
-    link:       string;
-  };
-}
 
 interface Service {
   icon: string;
@@ -105,4 +87,85 @@ interface WizardData {
   /* Step 4 */
   description: string;
   goals:       string[];
+}
+
+
+// project data 
+interface ProjectScreenshot {
+  src:     string | null;
+  alt:     string;
+  caption: string;
+  size:    "wide" | "half";
+}
+
+interface ProjectResult {
+  metric: string;
+  label:  string;
+  sub:    string;
+}
+
+interface ProjectDeliverable {
+  title: string;
+  desc:  string;
+}
+
+interface ProjectTestimonial {
+  quote:    string;
+  name:     string;
+  role:     string;
+  initials: string;
+}
+interface Project {
+  slug:         string;
+  service:      ServiceSlug;
+  serviceLabel: string;
+  year:         string;
+  title:        string;
+  client:       string;
+  industry:     string;
+  summary:      string;
+  challenge:    string;
+  approach:     string;
+  outcome:      string;
+  metric:       string;
+  metricLabel:  string;
+  tags:         string[];
+  featured:     boolean;
+  duration:     string;
+  team:         string;
+  results:      ProjectResult[];
+  deliverables: ProjectDeliverable[];
+  screenshots:  ProjectScreenshot[];
+  testimonial:  ProjectTestimonial | null;
+  nextSlug:     string | null;
+  classes: {
+    accent:      string;
+    dimBg:       string;
+    border:      string;
+    hoverBorder: string;
+    hoverShadow: string;
+    gradFrom:    string;
+  };
+}
+
+
+interface SampleProjects {
+  tag:         string;
+  title: string;
+  slug?: string;
+  desc:        string;
+  metric:      string;
+  metricLabel: string;
+  projectUrl?: string;
+  githubUrl?: string;
+  screenShots?: ProjectScreenshot[];
+  classes: {
+    tag:        string;
+    metric:     string;
+    orb:        string;
+    innerOrb:   string;
+    hoverBorder:string;
+    hoverShadow:string;
+    link:       string;
+  };
 }

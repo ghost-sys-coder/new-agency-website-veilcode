@@ -1,73 +1,8 @@
-/* ─── TYPES ───────────────────────────────────────────────────────────────── */
-
 export type ServiceSlug = "web" | "mobile" | "data" | "social" | "ai";
 
-export interface ProjectScreenshot {
-  /** Relative path under /public — e.g. "/work/nexus-commerce/hero.png"
-   *  Set to null to render the styled placeholder instead. */
-  src:     string | null;
-  alt:     string;
-  caption: string;
-  /** "wide" spans full width; "half" sits in a 2-col pair */
-  size:    "wide" | "half";
-}
-
-export interface ProjectResult {
-  metric: string;
-  label:  string;
-  sub:    string;
-}
-
-export interface ProjectDeliverable {
-  title: string;
-  desc:  string;
-}
-
-export interface ProjectTestimonial {
-  quote:    string;
-  name:     string;
-  role:     string;
-  initials: string;
-}
-
-export interface Project {
-  slug:         string;
-  service:      ServiceSlug;
-  serviceLabel: string;
-  year:         string;
-  title:        string;
-  client:       string;
-  industry:     string;
-  summary:      string;
-  challenge:    string;
-  approach:     string;
-  outcome:      string;
-  metric:       string;
-  metricLabel:  string;
-  tags:         string[];
-  featured:     boolean;
-  /* ── Extended case study fields ── */
-  duration:     string;
-  team:         string;
-  results:      ProjectResult[];
-  deliverables: ProjectDeliverable[];
-  screenshots:  ProjectScreenshot[];
-  testimonial:  ProjectTestimonial | null;
-  nextSlug:     string | null;
-  classes: {
-    accent:      string;
-    dimBg:       string;
-    border:      string;
-    hoverBorder: string;
-    hoverShadow: string;
-    gradFrom:    string;
-  };
-}
-
-/* ─── DATA ────────────────────────────────────────────────────────────────── */
 
 export const PROJECTS: Project[] = [
-  /* ── 01 NEXUS COMMERCE ─────────────────────────────────────────────────── */
+  // 01 NEXUS COMMERCE
   {
     slug:         "nexus-commerce",
     service:      "web",
@@ -129,7 +64,7 @@ export const PROJECTS: Project[] = [
     },
   },
 
-  /* ── 02 FLOWMETRICS ─────────────────────────────────────────────────────── */
+  // 02 FLOWMETRICS
   {
     slug:         "flowmetrics-dashboard",
     service:      "data",
@@ -188,7 +123,7 @@ export const PROJECTS: Project[] = [
     },
   },
 
-  /* ── 03 VANTAGE AI ──────────────────────────────────────────────────────── */
+    // 03 VANTAGE AI
   {
     slug:         "vantage-ai-agents",
     service:      "ai",
@@ -249,7 +184,7 @@ export const PROJECTS: Project[] = [
     },
   },
 
-  /* ── 04 TRADEPOST ───────────────────────────────────────────────────────── */
+  // 04 TRADEPOST 
   {
     slug:         "tradepost-mobile",
     service:      "mobile",
@@ -308,7 +243,7 @@ export const PROJECTS: Project[] = [
     },
   },
 
-  /* ── 05 BREWED ──────────────────────────────────────────────────────────── */
+  // 05 BREWED 
   {
     slug:         "brewed-social",
     service:      "social",
@@ -367,7 +302,7 @@ export const PROJECTS: Project[] = [
     },
   },
 
-  /* ── 06 MERIDIAN ────────────────────────────────────────────────────────── */
+  //  06 MERIDIAN 
   {
     slug:         "meridian-web",
     service:      "web",
@@ -427,7 +362,7 @@ export const PROJECTS: Project[] = [
     },
   },
 
-  /* ── 07 AGRIDATA ────────────────────────────────────────────────────────── */
+  // 07 AGRIDATA
   {
     slug:         "agridata-platform",
     service:      "data",
@@ -486,7 +421,7 @@ export const PROJECTS: Project[] = [
     },
   },
 
-  /* ── 08 HEALTHPULSE ─────────────────────────────────────────────────────── */
+  // 08 HEALTHPULSE
   {
     slug:         "healthpulse-app",
     service:      "mobile",
@@ -547,7 +482,7 @@ export const PROJECTS: Project[] = [
   },
 ];
 
-/* ─── FILTER CONFIG ───────────────────────────────────────────────────────── */
+//  FILTER CONFIG
 
 export type FilterKey = "all" | ServiceSlug;
 

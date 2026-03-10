@@ -9,6 +9,7 @@ import {
 import { fadeUp, stagger, useReveal } from "@/lib/motion";
 import { ServiceCard } from "../extras/ServiceCard";
 import { SERVICES } from "@/constants";
+import Link from "next/link";
 
 
 
@@ -68,7 +69,9 @@ export function Services() {
 
         {/* CTA row */}
         <div className="flex justify-center mt-12">
-          <GhostButton>View All Services →</GhostButton>
+          <GhostButton>
+            <Link href={"/services"}>View All Services →</Link>
+          </GhostButton>
         </div>
       </div>
     </section>
