@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { fadeUp, useReveal } from "@/lib/motion";
-import { PROJECTS, type Project } from "@/constants/projects";
+import { PROJECTS } from "@/constants/projects";
 
 export function NextProject({ project: p }: { project: Project }) {
   const [ref, inView] = useReveal("-40px");

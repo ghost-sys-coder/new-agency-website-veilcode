@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { SectionTag, AccentLine } from "@/components/extras/Primitives";
 import { fadeUp, stagger, useReveal } from "@/lib/motion";
 import { ScreenshotPlaceholder } from "./CaseStudyHero";
-import type { Project, ProjectScreenshot } from "@/constants/projects";
 
 
 function Shot({
@@ -50,7 +49,7 @@ function Shot({
   );
 }
 
-/* ─── SCREENSHOT GALLERY ──────────────────────────────────────────────────── */
+// screenshot gallery
 
 export function ScreenshotGallery({ project: p }: { project: Project }) {
   const [ref, inView] = useReveal("-40px");

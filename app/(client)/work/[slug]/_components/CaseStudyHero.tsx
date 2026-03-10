@@ -1,11 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { GridBg, GlowOrb, SectionTag, AccentLine } from "@/components/extras/Primitives";
 import { fadeUp, stagger } from "@/lib/motion";
-import type { Project } from "@/constants/projects";
 
-/* ─── IMAGE PLACEHOLDER ───────────────────────────────────────────────────── */
+// image placeholder
 
 export function ScreenshotPlaceholder({
   alt,
@@ -80,7 +80,7 @@ export function ScreenshotPlaceholder({
   );
 }
 
-/* ─── CASE STUDY HERO ─────────────────────────────────────────────────────── */
+// case study hero
 
 export function CaseStudyHero({ project: p }: { project: Project }) {
   const { classes: c } = p;
@@ -110,11 +110,11 @@ export function CaseStudyHero({ project: p }: { project: Project }) {
         >
           {/* Breadcrumb */}
           <motion.div variants={fadeUp(0)} className="flex items-center gap-2 mb-8">
-            <a href="/work"
+            <Link href="/work"
               className="font-mono text-[11px] tracking-widest uppercase
                 text-ink-faint hover:text-ink transition-colors duration-200 no-underline">
               Work
-            </a>
+            </Link>
             <span className="text-ink-faint" aria-hidden>/</span>
             <span className={`font-mono text-[11px] tracking-widest uppercase ${c.accent}`}>
               {p.title}

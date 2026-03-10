@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { fadeUp, useReveal } from "@/lib/motion";
-import type { Project } from "@/constants/projects";
 
 export function CaseStudyTestimonial({ project: p }: { project: Project }) {
   const [ref, inView] = useReveal("-40px");
