@@ -172,14 +172,7 @@ export const PROJECTS: SampleProjects[] = [
       hoverShadow: "hover:shadow-[0_0_40px_var(--color-svc-web-dim)]",
       link:        "text-svc-web",
     },
-     screenShots: [
-      { src: "/assets/nexus-project/image-client-1.jpg", alt: "Nexus Commerce homepage — desktop",         caption: "Homepage — desktop view",               size: "wide" },
-      { src: "/assets/nexus-project/image-client-2.jpg", alt: "Nexus Commerce product listing page",       caption: "Product listing page",                  size: "half" },
-      { src: "/assets/nexus-project/image-1.jpg", alt: "Nexus Commerce product detail page",        caption: "Product detail page",                   size: "half" },
-      { src: "/assets/nexus-project/image-2.jpg", alt: "Nexus Commerce mobile checkout flow",       caption: "Mobile checkout — step 1 of 2",         size: "half" },
-      { src: "/assets/nexus-project/image-3.jpg", alt: "Nexus Commerce order confirmation screen",  caption: "Order confirmation",                    size: "half" },
-      { src: "/assets/nexus-project/image-4.jpg", alt: "Nexus Commerce admin CMS dashboard",        caption: "Sanity CMS — product management",       size: "wide" },
-    ],
+    screenShot: "/assets/nexus-project/image-client-1.jpg"
   },
   {
     tag:         "Data Analytics",
@@ -197,12 +190,7 @@ export const PROJECTS: SampleProjects[] = [
       hoverShadow: "hover:shadow-[0_0_40px_var(--color-svc-data-dim)]",
       link:        "text-svc-data",
     },
-    screenShots: [
-      { src: "/assets/flow-metrics-project/image-1.jpg", alt: "FlowMetrics main analytics dashboard",      caption: "Main KPI dashboard — live view",         size: "wide" },
-      { src: "/assets/flow-metrics-project/image-2.jpg", alt: "FlowMetrics revenue breakdown chart",       caption: "Revenue breakdown — drill-down view",    size: "half" },
-      { src: "/assets/flow-metrics-project/image-3.jpg", alt: "FlowMetrics pipeline health monitor",       caption: "Pipeline health monitor",                size: "half" },
-      { src: "/assets/flow-metrics-project/image-4.jpg", alt: "FlowMetrics data lineage diagram",          caption: "dbt lineage graph",                      size: "wide" },
-    ],
+    screenShot: "/assets/flow-metrics-project/image-1.jpg"
   },
   {
     tag:         "AI Automation",
@@ -220,15 +208,10 @@ export const PROJECTS: SampleProjects[] = [
       hoverShadow: "hover:shadow-[0_0_40px_var(--color-svc-ai-dim)]",
       link:        "text-svc-ai",
     },
-    screenShots: [
-      { src: "/assets/vantage-ai-suite/image-1.jpg", alt: "Vantage agent orchestration dashboard",     caption: "Agent orchestration — live activity view",  size: "wide" },
-      { src: "/assets/vantage-ai-suite/image-2.jpg", alt: "Vantage document ingestion pipeline",       caption: "Document ingestion pipeline",               size: "half" },
-      { src: "/assets/vantage-ai-suite/image-3.jpg", alt: "Vantage human review queue",                caption: "Human-in-the-loop review queue",            size: "half" },
-      { src: "/assets/vantage-ai-suite/image-4.jpg", alt: "Vantage compliance screening results",      caption: "Compliance pre-screening results",          size: "half" },
-      { src: "/assets/vantage-ai-suite/image-1.jpg", alt: "Vantage agent performance metrics",         caption: "Agent performance metrics",                 size: "half" },
-    ],
+    screenShot: "/assets/vantage-ai-suite/image-1.jpg"
   },
 ];
+
 
 
 

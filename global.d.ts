@@ -158,7 +158,7 @@ interface SampleProjects {
   metricLabel: string;
   projectUrl?: string;
   githubUrl?: string;
-  screenShots?: ProjectScreenshot[];
+  screenShot?: string;
   classes: {
     tag:        string;
     metric:     string;

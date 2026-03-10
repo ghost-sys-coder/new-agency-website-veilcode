@@ -165,7 +165,7 @@ export const PROJECTS: Project[] = [
       { src: "/assets/vantage-ai-suite/image-2.jpg", alt: "Vantage document ingestion pipeline",       caption: "Document ingestion pipeline",               size: "half" },
       { src: "/assets/vantage-ai-suite/image-3.jpg", alt: "Vantage human review queue",                caption: "Human-in-the-loop review queue",            size: "half" },
       { src: "/assets/vantage-ai-suite/image-4.jpg", alt: "Vantage compliance screening results",      caption: "Compliance pre-screening results",          size: "half" },
-      { src: "/assets/vantage-ai-suite/image-1.jpg", alt: "Vantage agent performance metrics",         caption: "Agent performance metrics",                 size: "half" },
+      { src: "/assets/vantage-ai-suite/image-2.jpg", alt: "Vantage agent performance metrics",         caption: "Agent performance metrics",                 size: "half" },
     ],
     testimonial: {
       quote:    "The audit alone was worth the engagement. VeilCode identified three workflows we hadn't even considered automating. The agents they built are running in production daily — reliable, auditable, and genuinely transformative for our team.",

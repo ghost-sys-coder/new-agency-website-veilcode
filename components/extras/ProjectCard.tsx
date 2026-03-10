@@ -18,18 +18,6 @@ export function ProjectCard({
   const [hovered, setHovered] = useState(false);
   const { classes: c } = project;
 
-  // Randomly select one screenshot (only once when component mounts)
-  const [randomScreenshot] = useState(() => {
-    if (!project.screenShots || project.screenShots.length === 0) {
-      return null;
-    }
-
-    const randomIndex = Math.floor(Math.random() * project.screenShots.length);
-    return project.screenShots[randomIndex];
-  });
-
-  // Fallback image if no screenshots exist
-  const fallbackImage = "/assets/placeholder/project-fallback.jpg"; // ← add your own fallback
 
   return (
     <motion.article
@@ -43,8 +31,8 @@ export function ProjectCard({
       {/* Visual / Image Panel */}
       <div className="relative h-64 md:h-72 overflow-hidden">
         <Image
-          src={randomScreenshot?.src || fallbackImage}
-          alt={randomScreenshot?.alt || `${project.title} preview`}
+          src={project.screenShot ?? ""}
+          alt={`${project.title} preview`}
           fill
           className="object-cover object-center transition-transform duration-700
             group-hover:scale-105"
