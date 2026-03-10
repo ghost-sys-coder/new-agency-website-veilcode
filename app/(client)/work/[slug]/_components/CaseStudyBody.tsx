@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { fadeUp, stagger, useReveal } from "@/lib/motion";
-import type { Project } from "@/constants/projects";
+
 
 export function CaseStudyBody({ project: p }: { project: Project }) {
   const [ref, inView] = useReveal("-40px");
