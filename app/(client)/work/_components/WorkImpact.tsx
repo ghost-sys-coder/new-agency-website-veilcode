@@ -3,8 +3,7 @@
 import { motion } from "framer-motion";
 import { SectionTag, AccentLine } from "@/components/extras/Primitives";
 import { fadeUp, stagger, useReveal } from "@/lib/motion";
-
-/* ─── DATA ────────────────────────────────────────────────────────────────── */
+import { ImpactStatCard } from "./ImpactStatCard";
 
 const IMPACT_STATS = [
   {
@@ -49,39 +48,6 @@ const IMPACT_STATS = [
   },
 ] as const;
 
-/* ─── STAT CARD ───────────────────────────────────────────────────────────── */
-
-function ImpactStat({
-  stat,
-  index,
-}: {
-  stat: (typeof IMPACT_STATS)[number];
-  index: number;
-}) {
-  return (
-    <motion.div
-      variants={fadeUp(index * 0.08)}
-      className={`flex flex-col rounded-xl border p-6
-        transition-all duration-200 hover:bg-surface-hi
-        bg-surface ${stat.border}`}
-    >
-      <div
-        className={`font-display font-extrabold text-[42px] tracking-tight
-          leading-none mb-2 drop-shadow-[0_0_20px_currentColor] ${stat.accent}`}
-      >
-        {stat.metric}
-      </div>
-      <div className="font-sans text-sm font-medium text-ink mb-0.5">
-        {stat.label}
-      </div>
-      <div className="font-sans text-xs text-ink-faint capitalize">
-        {stat.sub}
-      </div>
-    </motion.div>
-  );
-}
-
-/* ─── IMPACT SECTION ──────────────────────────────────────────────────────── */
 
 export function WorkImpact() {
   const [ref, inView] = useReveal();
@@ -128,7 +94,7 @@ export function WorkImpact() {
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5"
           >
             {IMPACT_STATS.map((s, i) => (
-              <ImpactStat key={s.metric} stat={s} index={i} />
+              <ImpactStatCard key={s.metric} stat={s} index={i} />
             ))}
           </motion.div>
         </motion.div>

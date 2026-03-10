@@ -1,5 +1,15 @@
 declare module "*.css";
 
+
+interface WorkImpactStats {
+  metric: string;
+  label: string;
+  sub: string;
+  accent: string;
+  bg: string;
+  border: string;
+}
+
 interface TeamMember {
   initials:  string;
   name:      string;
