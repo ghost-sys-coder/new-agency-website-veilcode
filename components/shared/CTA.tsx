@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { SectionTag, AccentLine, PrimaryButton, GhostButton } from "@/components/extras/Primitives";
+import { SectionTag, AccentLine, PrimaryButton } from "@/components/extras/Primitives";
 import { fadeUp, stagger, useReveal } from "@/lib/motion";
+import Link from "next/link";
 
 export function CTA() {
   const [ref, inView] = useReveal();
@@ -72,9 +73,9 @@ export function CTA() {
               <PrimaryButton className="text-[15px]! px-9! py-4!">
                 Book a Discovery Call →
               </PrimaryButton>
-              <GhostButton className="text-[15px]! px-9! py-4!">
-                View Pricing
-              </GhostButton>
+              <PrimaryButton className="text-[15px]! px-9! py-4!">
+                <Link href={"/services/#pricing"}>View Pricing</Link>
+              </PrimaryButton>
             </motion.div>
           </div>
         </motion.div>

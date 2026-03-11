@@ -86,7 +86,7 @@ export function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
   
-  if (pathname === "/start") return null;
+  if (pathname === "/start" || pathname.includes("/newsletter")) return null;
   
   return (
     <>

@@ -14,7 +14,7 @@ export function PricingTiers() {
   const [ref, inView] = useReveal();
 
   return (
-    <section className="py-32 px-6 md:px-10">
+    <section className="py-32 px-6 md:px-10" id="pricing">
       <div className="max-w-300 mx-auto">
 
         {/* Header */}

@@ -6,7 +6,7 @@ import { fadeUp, stagger, useReveal } from "@/lib/motion";
 import { AnimatedArrow } from "@/components/extras/Primitives";
 import { formatDate, type BlogPost } from "@/constants/blog";
 
-/* ─── RELATED CARD ────────────────────────────────────────────────────────── */
+// related card
 
 function RelatedCard({ post: p, index }: { post: BlogPost; index: number }) {
   const [hovered, setHovered] = useState(false);
@@ -80,7 +80,7 @@ function RelatedCard({ post: p, index }: { post: BlogPost; index: number }) {
   );
 }
 
-/* ─── RELATED POSTS ───────────────────────────────────────────────────────── */
+// related posts
 
 export function RelatedPosts({ posts }: { posts: BlogPost[] }) {
   const [ref, inView] = useReveal("-40px");

@@ -8,7 +8,7 @@ import { SOCIALS, FOOTER_COLS } from "@/constants";
 export function Footer() {
   const pathname = usePathname();
 
-  if (pathname === "/start") return null;
+  if (pathname === "/start" || pathname.includes("/newsletter")) return null;
   return (
     <footer className="border-t border-line bg-surface pt-16 pb-10 px-6 md:px-10">
       <div className="max-w-30Link mx-auto">
