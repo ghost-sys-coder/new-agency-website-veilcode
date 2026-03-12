@@ -254,7 +254,7 @@ export function Step3({
             Full Name <span className="text-brand" aria-hidden>*</span>
           </label>
           <input id="w-name" type="text" autoComplete="name"
-            placeholder="David Kabugo"
+            placeholder="John Doe"
             value={data.name}
             onChange={(e) => setData({ ...data, name: e.target.value })}
             className={`${inputCls} ${errors.name ? inputErrCls : ""}`}
@@ -334,14 +334,14 @@ export function Step4({
           </label>
           <textarea id="w-desc" rows={5}
             placeholder="E.g. We have an existing platform that's too slow on mobile. We're losing customers at checkout and need to rebuild the storefront with better performance..."
-            value={data.description}
-            onChange={(e) => setData({ ...data, description: e.target.value })}
+            value={data.message}
+            onChange={(e) => setData({ ...data, message: e.target.value })}
             className={`${inputCls} resize-none ${errors.description ? inputErrCls : ""}`}
           />
           <div className="flex items-start justify-between mt-1">
             <FieldError msg={errors.description} />
             <span className="font-mono text-[10px] text-ink-faint ml-auto">
-              {data.description.length} chars
+              {data.message.length} chars
             </span>
           </div>
         </div>

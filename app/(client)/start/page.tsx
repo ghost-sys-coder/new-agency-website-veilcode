@@ -6,20 +6,30 @@ import { ProgressBar } from "./_components/ProgressBar";
 import { SuccessScreen } from "./_components/SuccessComponent";
 import { validateStep } from "./_components/ValidateStep";
 import { Step1, Step2, Step3, Step4 } from "./_components/Steps";
+import { toast } from "sonner";
+import axios from "axios";
 
 type SubmitState = "idle" | "loading" | "success" | "error";
 
 const EMPTY: WizardData = {
-  service: "", budget: "", timeline: "",
-  name: "", email: "", company: "",
-  description: "", goals: [],
+
+  service: "",
+  budget: "",
+  timeline: "",
+
+  name: "",
+  email: "",
+  company: "",
+
+  message: "",
+  goals: [],
 };
 
 export const SERVICES = [
   {
-    id:    "web",
-    label: "Web Solutions",
-    sub:   "Design & development",
+    id: "web",
+    label: "Web Solutions (Design & Development)",
+    sub: "Design & development",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden>
         <rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" strokeWidth="1.5" />
@@ -30,9 +40,9 @@ export const SERVICES = [
     activeBg: "bg-svc-web-dim", activeBorder: "border-svc-web-border", activeText: "text-svc-web",
   },
   {
-    id:    "mobile",
+    id: "Mobile Application Development",
     label: "Mobile Application",
-    sub:   "iOS & Android",
+    sub: "iOS & Android",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden>
         <rect x="5" y="2" width="14" height="20" rx="2" stroke="currentColor" strokeWidth="1.5" />
@@ -43,9 +53,9 @@ export const SERVICES = [
     activeBg: "bg-svc-mobile-dim", activeBorder: "border-svc-mobile-border", activeText: "text-svc-mobile",
   },
   {
-    id:    "data",
+    id: "data",
     label: "Data Analytics",
-    sub:   "Pipelines & dashboards",
+    sub: "Pipelines & dashboards",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden>
         <path d="M18 20V10M12 20V4M6 20v-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -55,9 +65,9 @@ export const SERVICES = [
     activeBg: "bg-svc-data-dim", activeBorder: "border-svc-data-border", activeText: "text-svc-data",
   },
   {
-    id:    "social",
-    label: "Social Media",
-    sub:   "Strategy & execution",
+    id: "social",
+    label: "Social Media Marketing",
+    sub: "Strategy & execution",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden>
         <circle cx="18" cy="5" r="3" stroke="currentColor" strokeWidth="1.5" />
@@ -70,9 +80,9 @@ export const SERVICES = [
     activeBg: "bg-svc-social-dim", activeBorder: "border-svc-social-border", activeText: "text-svc-social",
   },
   {
-    id:    "ai",
+    id: "ai",
     label: "AI Automation",
-    sub:   "Agents & workflows",
+    sub: "Agents & workflows",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden>
         <path d="M12 2a4 4 0 014 4v1h1a2 2 0 012 2v6a2 2 0 01-2 2h-1v1a4 4 0 01-8 0v-1H7a2 2 0 01-2-2V9a2 2 0 012-2h1V6a4 4 0 014-4z" stroke="currentColor" strokeWidth="1.5" />
@@ -83,9 +93,9 @@ export const SERVICES = [
     activeBg: "bg-svc-ai-dim", activeBorder: "border-svc-ai-border", activeText: "text-svc-ai",
   },
   {
-    id:    "multiple",
+    id: "multiple",
     label: "Multiple Services",
-    sub:   "Let's scope together",
+    sub: "Let's scope together",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden>
         <path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
@@ -102,10 +112,10 @@ export const SERVICES = [
 const TOTAL_STEPS = 4;
 
 export default function StartProjectWizard() {
-  const [step,         setStep]         = useState(1);
-  const [data,         setData]         = useState<WizardData>(EMPTY);
-  const [fieldErrors,  setFieldErrors]  = useState<Record<string, string>>({});
-  const [submitState,  setSubmitState]  = useState<SubmitState>("idle");
+  const [step, setStep] = useState(1);
+  const [data, setData] = useState<WizardData>(EMPTY);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const [submitState, setSubmitState] = useState<SubmitState>("idle");
 
   async function handleNext() {
     const errs = validateStep(step, data);
@@ -119,8 +129,19 @@ export default function StartProjectWizard() {
     } else {
       // Final submit
       setSubmitState("loading");
-      await new Promise((r) => setTimeout(r, 1800)); // replace with real API call
-      setSubmitState("success");
+      try {
+        const { status, data: result } = await axios.post("/api/messages", data);
+
+        if (status === 201 && result?.success) {
+          toast.success(result?.message || "Check your email for confirmation");
+          setData(EMPTY);
+          setSubmitState("success");
+        }
+      } catch (error) {
+        console.log("Something went wrong!", error);
+        toast.error((error as Error).message || "Something went wrong!");
+        setSubmitState("idle");
+      }
     }
   }
 

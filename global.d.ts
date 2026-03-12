@@ -1,5 +1,15 @@
 declare module "*.css";
 
+interface ContactFormProps {
+  name: string;
+  service: string;
+  budget: string;
+  timeline: string;
+  company: string;
+  email?: string;
+  message?: string;
+  goals?: string[];
+}
 
 interface WorkImpactStats {
   metric: string;
@@ -95,7 +105,7 @@ interface WizardData {
   email:       string;
   company:     string;
   /* Step 4 */
-  description: string;
+  message: string;
   goals:       string[];
 }
 

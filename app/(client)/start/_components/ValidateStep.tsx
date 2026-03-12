@@ -11,7 +11,7 @@ export function validateStep(step: number, data: WizardData) {
     return errs;
   }
   if (step === 4) {
-    if (!data.description.trim() || data.description.trim().length < 20)
+    if (!data.message.trim() || data.message.trim().length < 20)
       return { description: "Please describe your project (at least 20 characters)." };
   }
   return {};

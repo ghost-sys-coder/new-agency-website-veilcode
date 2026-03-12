@@ -1,14 +1,206 @@
-interface ContactFormProps {
-    name: string;
-    service: string;
-    budget: string;
-    timeline: string;
-    company: string;
-    email?: string;
-    message?: string;
-}
+export const adminLeadConfirmationTemplate = async ({
+  name,
+  email,
+  company,
+  service,
+  budget,
+  timeline,
+  message,
+  goals,
+}: ContactFormProps) => {
+  const goalsHTML =
+    goals && goals.length > 0
+      ? `
+        <tr>
+          <td style="padding: 20px 32px; border-bottom: 1px solid #f0f0f0;">
+            <p style="margin: 0 0 12px; font-size: 11px; font-weight: 600;
+              letter-spacing: 0.08em; text-transform: uppercase; color: #999;">
+              Client Goals
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+              ${goals
+                .map(
+                  (goal) => `
+                <span style="display: inline-block; padding: 5px 12px;
+                  background: #f5f3ff; border: 1px solid #ddd6fe;
+                  border-radius: 999px; font-size: 12px;
+                  font-weight: 500; color: #6d28d9;">
+                  ${goal}
+                </span>`
+                )
+                .join("")}
+            </div>
+          </td>
+        </tr>`
+      : "";
+
+  const metaRow = (label: string, value: string) => `
+    <tr>
+      <td style="padding: 14px 32px; border-bottom: 1px solid #f0f0f0;">
+        <table width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+            <td style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+              text-transform: uppercase; color: #999; width: 110px; vertical-align: top;
+              padding-top: 1px;">
+              ${label}
+            </td>
+            <td style="font-size: 14px; color: #1a1a1a; font-weight: 500;">
+              ${value}
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>`;
+
+  return `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New Enquiry — VeilCode</title>
+</head>
+<body style="margin: 0; padding: 0; background: #f4f4f5; font-family: 'Segoe UI', system-ui, sans-serif;">
+
+  <table width="100%" cellpadding="0" cellspacing="0" style="background: #f4f4f5; padding: 40px 16px;">
+    <tr>
+      <td align="center">
+        <table width="100%" cellpadding="0" cellspacing="0"
+          style="max-width: 600px; background: #ffffff;
+            border-radius: 16px; overflow: hidden;
+            border: 1px solid #e4e4e7;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);">
+
+          <!-- Header -->
+          <tr>
+            <td style="background: #111111; padding: 28px 32px;">
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td>
+                    <p style="margin: 0; font-size: 11px; font-weight: 600;
+                      letter-spacing: 0.12em; text-transform: uppercase;
+                      color: #888; margin-bottom: 6px;">
+                      VeilCode Studio
+                    </p>
+                    <h1 style="margin: 0; font-size: 22px; font-weight: 700;
+                      color: #ffffff; letter-spacing: -0.02em;">
+                      New Enquiry Received
+                    </h1>
+                  </td>
+                  <td align="right" style="vertical-align: middle;">
+                    <span style="display: inline-block; padding: 6px 14px;
+                      background: #1a1a1a; border: 1px solid #333;
+                      border-radius: 999px; font-size: 11px;
+                      font-weight: 600; color: #a3e635;
+                      letter-spacing: 0.05em;">
+                      ● LIVE
+                    </span>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Sender highlight -->
+          <tr>
+            <td style="padding: 24px 32px; background: #fafafa; border-bottom: 1px solid #f0f0f0;">
+              <table cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="vertical-align: middle;">
+                    <div style="width: 44px; height: 44px; border-radius: 999px;
+                      background: #111; display: flex; align-items: center;
+                      justify-content: center; font-size: 18px; font-weight: 700;
+                      color: #fff; text-align: center; line-height: 44px;">
+                      ${name.charAt(0).toUpperCase()}
+                    </div>
+                  </td>
+                  <td style="padding-left: 14px; vertical-align: middle;">
+                    <p style="margin: 0; font-size: 15px; font-weight: 600; color: #111;">
+                      ${name}
+                    </p>
+                    <p style="margin: 2px 0 0; font-size: 13px; color: #777;">
+                      ${email ?? "No email provided"}
+                      ${company ? `&nbsp;·&nbsp;<span style="color:#555;">${company}</span>` : ""}
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Meta rows -->
+          <tr>
+            <td>
+              <table width="100%" cellpadding="0" cellspacing="0">
+                ${metaRow("Service", service)}
+                ${budget ? metaRow("Budget", budget) : ""}
+                ${timeline ? metaRow("Timeline", timeline) : ""}
+                ${goalsHTML}
+              </table>
+            </td>
+          </tr>
+
+          <!-- Message -->
+          ${
+            message
+              ? `
+          <tr>
+            <td style="padding: 20px 32px 24px;">
+              <p style="margin: 0 0 10px; font-size: 11px; font-weight: 600;
+                letter-spacing: 0.08em; text-transform: uppercase; color: #999;">
+                Message
+              </p>
+              <div style="background: #f8f8f8; border-left: 3px solid #111;
+                border-radius: 0 8px 8px 0; padding: 16px 20px;">
+                <p style="margin: 0; font-size: 14px; line-height: 1.7;
+                  color: #333; white-space: pre-wrap;">
+                  ${message}
+                </p>
+              </div>
+            </td>
+          </tr>`
+              : ""
+          }
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 20px 32px; background: #fafafa;
+              border-top: 1px solid #f0f0f0; border-radius: 0 0 16px 16px;">
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td>
+                    <p style="margin: 0; font-size: 12px; color: #aaa; line-height: 1.6;">
+                      Reply directly to this email to respond to ${name},
+                      or view the full submission in your admin dashboard.
+                    </p>
+                  </td>
+                  <td align="right" style="white-space: nowrap; padding-left: 16px;">
+                    <p style="margin: 0; font-size: 11px; color: #ccc;">
+                      ${new Date().toLocaleDateString("en-GB", {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
+                      })}
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>
+  `;
+};
+
+
 export const clientEmailTemplate = async (confirmUrl: string) => {
-    return `
+  return `
     <!DOCTYPE html>
                 <html>
                 <body style="margin:0;padding:0;background:#0a0a0a;font-family:sans-serif;">
@@ -53,58 +245,244 @@ export const clientEmailTemplate = async (confirmUrl: string) => {
                     </table>
                 </body>
                 </html>
-    `
-}
+    `;
+};
 
-// confirmation email to the client - from contact form
-export const clientContactFormTemplate = async ({name, service, budget, timeline, company }: ContactFormProps) => {
-    return `
-    <div style="font-family: system-ui, sans-serif; max-width: 600px; margin: 0 auto; padding: 32px 20px;">
-          <h1 style="color: #111; font-size: 24px; margin-bottom: 8px;">Thank you, ${name.split(" ")[0]}!</h1>
-          <p style="color: #555; line-height: 1.6; margin-bottom: 24px;">
-            We’ve received your project enquiry and are excited to learn more about what you’re building.
-          </p>
-          <div style="background: #f8f9fa; border-radius: 8px; padding: 20px; margin: 24px 0;">
-            <h3 style="margin: 0 0 12px; color: #333; font-size: 18px;">Your submission summary:</h3>
-            <p style="margin: 8px 0; color: #444;">
-              <strong>Service:</strong> ${service}<br>
-              ${budget ? `<strong>Budget:</strong> ${budget}<br>` : ""}
-              ${timeline ? `<strong>Timeline:</strong> ${timeline}<br>` : ""}
-              ${company ? `<strong>Company:</strong> ${company}<br>` : ""}
-            </p>
-          </div>
-          <p style="color: #555; line-height: 1.6; margin-bottom: 24px;">
-            Our team will review your message and get back to you within <strong>one business day</strong>.
-          </p>
-          <p style="color: #777; font-size: 14px; margin-top: 32px; border-top: 1px solid #eee; padding-top: 16px;">
-            VeilCode Agency<br>
-            Building purposeful digital experiences<br>
-            <a href="https://youragency.com" style="color: #0066cc; text-decoration: none;">youragency.com</a>
-          </p>
-        </div>
-    `
-}
+export const clientContactFormTemplate = async ({
+  name,
+  service,
+  budget,
+  timeline,
+  company,
+}: ContactFormProps) => {
+  const firstName = name.split(" ")[0];
 
-// lead confirmation email to the admin
-export const adminLeadConfirmationTemplate = async ({name, email, company, service, budget, timeline, message}: ContactFormProps) => {
-    return `
-    <div style="font-family: system-ui, sans-serif; max-width: 600px; margin: 0 auto; padding: 32px 20px;">
-          <h1 style="color: #111; font-size: 24px;">New Enquiry Received</h1>
-          <p style="color: #555; margin: 16px 0;">
-            <strong>From:</strong> ${name} <${email}>
-          </p>
-          ${company ? `<p><strong>Company:</strong> ${company}</p>` : ""}
-          <p><strong>Service:</strong> ${service}</p>
-          ${budget ? `<p><strong>Budget:</strong> ${budget}</p>` : ""}
-          ${timeline ? `<p><strong>Timeline:</strong> ${timeline}</p>` : ""}
-          <div style="background: #f8f9fa; border-radius: 8px; padding: 20px; margin: 24px 0;">
-            <h3 style="margin: 0 0 12px; color: #333;">Message:</h3>
-            <p style="margin: 0; white-space: pre-wrap; color: #444;">${message}</p>
-          </div>
-          <p style="color: #777; font-size: 14px; margin-top: 32px;">
-            View full details in admin dashboard or reply directly to this email.
-          </p>
-        </div>
-    `
-}
+  const metaRow = (label: string, value: string) => `
+    <tr>
+      <td style="padding: 13px 0; border-bottom: 1px solid #f0f0f0;">
+        <table width="100%" cellpadding="0" cellspacing="0">
+          <tr>
+            <td style="font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+              text-transform: uppercase; color: #999; width: 100px; vertical-align: top;
+              padding-top: 1px;">
+              ${label}
+            </td>
+            <td style="font-size: 14px; color: #1a1a1a; font-weight: 500;">
+              ${value}
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>`;
+
+  return `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>We received your enquiry — VeilCode</title>
+</head>
+<body style="margin: 0; padding: 0; background: #f4f4f5;
+  font-family: 'Segoe UI', system-ui, sans-serif;">
+
+  <table width="100%" cellpadding="0" cellspacing="0"
+    style="background: #f4f4f5; padding: 40px 16px;">
+    <tr>
+      <td align="center">
+        <table width="100%" cellpadding="0" cellspacing="0"
+          style="max-width: 600px; background: #ffffff; border-radius: 16px;
+            overflow: hidden; border: 1px solid #e4e4e7;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);">
+
+          <!-- Header -->
+          <tr>
+            <td style="background: #111111; padding: 36px 32px 32px;">
+              <p style="margin: 0 0 10px; font-size: 11px; font-weight: 600;
+                letter-spacing: 0.12em; text-transform: uppercase; color: #666;">
+                VeilCode Studio
+              </p>
+              <h1 style="margin: 0 0 6px; font-size: 26px; font-weight: 700;
+                color: #ffffff; letter-spacing: -0.02em; line-height: 1.2;">
+                We&apos;ve got your message,<br />${firstName}.
+              </h1>
+              <p style="margin: 12px 0 0; font-size: 14px; color: #888; line-height: 1.6;">
+                Thanks for reaching out. Your enquiry is in safe hands
+                and we&apos;ll be in touch shortly.
+              </p>
+            </td>
+          </tr>
+
+          <!-- What happens next banner -->
+          <tr>
+            <td style="background: #f0fdf4; border-top: 1px solid #bbf7d0;
+              border-bottom: 1px solid #bbf7d0; padding: 14px 32px;">
+              <table cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="vertical-align: middle; padding-right: 10px;
+                    font-size: 18px; line-height: 1;">
+                    ✅
+                  </td>
+                  <td style="font-size: 13px; color: #166534; font-weight: 500;">
+                    Enquiry received — our team will respond within
+                    <strong>1 business day</strong>.
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Submission summary -->
+          <tr>
+            <td style="padding: 28px 32px 8px;">
+              <p style="margin: 0 0 16px; font-size: 11px; font-weight: 600;
+                letter-spacing: 0.08em; text-transform: uppercase; color: #999;">
+                Your Submission
+              </p>
+              <table width="100%" cellpadding="0" cellspacing="0">
+                ${metaRow("Service", service)}
+                ${budget ? metaRow("Budget", budget) : ""}
+                ${timeline ? metaRow("Timeline", timeline) : ""}
+                ${company ? metaRow("Company", company) : ""}
+              </table>
+            </td>
+          </tr>
+
+          <!-- What happens next steps -->
+          <tr>
+            <td style="padding: 28px 32px;">
+              <p style="margin: 0 0 16px; font-size: 11px; font-weight: 600;
+                letter-spacing: 0.08em; text-transform: uppercase; color: #999;">
+                What Happens Next
+              </p>
+              <table width="100%" cellpadding="0" cellspacing="0">
+
+                <tr>
+                  <td style="vertical-align: top; padding-bottom: 16px;">
+                    <table cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td style="vertical-align: top; padding-right: 14px;">
+                          <div style="width: 28px; height: 28px; border-radius: 999px;
+                            background: #111; text-align: center; line-height: 28px;
+                            font-size: 12px; font-weight: 700; color: #fff;">
+                            1
+                          </div>
+                        </td>
+                        <td style="vertical-align: top; padding-top: 4px;">
+                          <p style="margin: 0 0 2px; font-size: 14px; font-weight: 600;
+                            color: #111;">
+                            Review
+                          </p>
+                          <p style="margin: 0; font-size: 13px; color: #777; line-height: 1.5;">
+                            Our team reviews your project details and goals.
+                          </p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td style="vertical-align: top; padding-bottom: 16px;">
+                    <table cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td style="vertical-align: top; padding-right: 14px;">
+                          <div style="width: 28px; height: 28px; border-radius: 999px;
+                            background: #111; text-align: center; line-height: 28px;
+                            font-size: 12px; font-weight: 700; color: #fff;">
+                            2
+                          </div>
+                        </td>
+                        <td style="vertical-align: top; padding-top: 4px;">
+                          <p style="margin: 0 0 2px; font-size: 14px; font-weight: 600;
+                            color: #111;">
+                            Discovery Call
+                          </p>
+                          <p style="margin: 0; font-size: 13px; color: #777; line-height: 1.5;">
+                            We schedule a short call to align on scope, timeline, and outcomes.
+                          </p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td style="vertical-align: top;">
+                    <table cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td style="vertical-align: top; padding-right: 14px;">
+                          <div style="width: 28px; height: 28px; border-radius: 999px;
+                            background: #111; text-align: center; line-height: 28px;
+                            font-size: 12px; font-weight: 700; color: #fff;">
+                            3
+                          </div>
+                        </td>
+                        <td style="vertical-align: top; padding-top: 4px;">
+                          <p style="margin: 0 0 2px; font-size: 14px; font-weight: 600;
+                            color: #111;">
+                            Proposal
+                          </p>
+                          <p style="margin: 0; font-size: 13px; color: #777; line-height: 1.5;">
+                            You receive a tailored proposal with a clear roadmap and pricing.
+                          </p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+
+              </table>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td style="padding: 20px 32px 28px; background: #fafafa;
+              border-top: 1px solid #f0f0f0;">
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td>
+                    <p style="margin: 0 0 4px; font-size: 13px; font-weight: 600;
+                      color: #111;">
+                      VeilCode Studio
+                    </p>
+                    <p style="margin: 0; font-size: 12px; color: #aaa; line-height: 1.6;">
+                      Building purposeful digital experiences.<br />
+                      <a href="https://veilcodestudio.vercel.app"
+                        style="color: #555; text-decoration: underline;
+                          text-underline-offset: 2px;">
+                        veilcodestudio.vercel.app
+                      </a>
+                    </p>
+                  </td>
+                  <td align="right" style="vertical-align: bottom;">
+                    <p style="margin: 0; font-size: 11px; color: #ccc;">
+                      ${new Date().toLocaleDateString("en-GB", {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
+                      })}
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+        </table>
+
+        <!-- Legal note -->
+        <p style="margin: 16px 0 0; font-size: 11px; color: #bbb; text-align: center;">
+          You&apos;re receiving this because you submitted an enquiry on VeilCode Studio.
+        </p>
+
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>
+  `;
+};
 

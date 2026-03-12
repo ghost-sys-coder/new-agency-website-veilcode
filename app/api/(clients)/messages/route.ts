@@ -6,7 +6,7 @@ import { adminLeadConfirmationTemplate, clientContactFormTemplate } from "@/lib/
 
 export async function POST(req: NextRequest) {
     try {
-        const { name, email, company, service, budget, timeline, message } = await req.json();
+        const { name, email, company, service, budget, timeline, message, goals } = await req.json();
 
         if (!name || !email || !service || !message) {
             return NextResponse.json({
@@ -22,7 +22,8 @@ export async function POST(req: NextRequest) {
             message,
             budget,
             timeline,
-            company
+            company,
+            goals
         }).returning();
 
         if (!inquiry.id) {

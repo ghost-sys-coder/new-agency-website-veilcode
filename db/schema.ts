@@ -35,6 +35,17 @@ export const servicesEnum = pgEnum("services", [
   "AI Automation",
   "Multiple Services",
   "Not Sure Yet",
+]);
+
+export const goalsEnum = pgEnum("goals", [
+  "Increase revenue",
+  "Reduce manual work",
+  "Launch a new product",
+  "Improve user experience",
+  "Scale existing systems",
+  "Enter a new market",
+  "Build internal tools",
+  "Data-driven decisions",
 ])
 
 
@@ -42,10 +53,11 @@ export const clientInquiries = pgTable("client_inquiries", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
   email: text("email").notNull(),
-  service: servicesEnum("service").notNull(),
+  service: text("service").notNull(),
   company: text("company"),
   budget: budgetEnum("budget"),
   timeline: timelineEnum("timelines"),
   message: text("message").notNull(),
+  goals: goalsEnum("goals").array(),
   createAt: timestamp("created_at").defaultNow()
 })
