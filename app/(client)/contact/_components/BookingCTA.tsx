@@ -6,6 +6,7 @@ import { SectionTag, AccentLine, PrimaryButton, GhostButton } from "@/components
 import { fadeUp, stagger, useReveal } from "@/lib/motion";
 import { MeetingCard } from "./MeetingCard";
 import { MEETING_TYPES } from "@/constants";
+import Link from "next/link";
 
 
 export function BookingCTA() {
@@ -106,10 +107,10 @@ export function BookingCTA() {
                 className="flex flex-wrap gap-4"
               >
                 <PrimaryButton className="text-[15px]! px-8! py-4!">
-                  Book a {MEETING_TYPES[selected].title} →
+                  <Link href={"/start"}>Book a {MEETING_TYPES[selected].title} →</Link>
                 </PrimaryButton>
                 <GhostButton className="text-[15px]! px-8! py-4!">
-                  Send a Message Instead
+                  <Link href={"#form-message"}>Send a Message Instead</Link>
                 </GhostButton>
               </motion.div>
 

@@ -1,3 +1,12 @@
+interface ContactFormProps {
+    name: string;
+    service: string;
+    budget: string;
+    timeline: string;
+    company: string;
+    email?: string;
+    message?: string;
+}
 export const clientEmailTemplate = async (confirmUrl: string) => {
     return `
     <!DOCTYPE html>
@@ -46,3 +55,56 @@ export const clientEmailTemplate = async (confirmUrl: string) => {
                 </html>
     `
 }
+
+// confirmation email to the client - from contact form
+export const clientContactFormTemplate = async ({name, service, budget, timeline, company }: ContactFormProps) => {
+    return `
+    <div style="font-family: system-ui, sans-serif; max-width: 600px; margin: 0 auto; padding: 32px 20px;">
+          <h1 style="color: #111; font-size: 24px; margin-bottom: 8px;">Thank you, ${name.split(" ")[0]}!</h1>
+          <p style="color: #555; line-height: 1.6; margin-bottom: 24px;">
+            We’ve received your project enquiry and are excited to learn more about what you’re building.
+          </p>
+          <div style="background: #f8f9fa; border-radius: 8px; padding: 20px; margin: 24px 0;">
+            <h3 style="margin: 0 0 12px; color: #333; font-size: 18px;">Your submission summary:</h3>
+            <p style="margin: 8px 0; color: #444;">
+              <strong>Service:</strong> ${service}<br>
+              ${budget ? `<strong>Budget:</strong> ${budget}<br>` : ""}
+              ${timeline ? `<strong>Timeline:</strong> ${timeline}<br>` : ""}
+              ${company ? `<strong>Company:</strong> ${company}<br>` : ""}
+            </p>
+          </div>
+          <p style="color: #555; line-height: 1.6; margin-bottom: 24px;">
+            Our team will review your message and get back to you within <strong>one business day</strong>.
+          </p>
+          <p style="color: #777; font-size: 14px; margin-top: 32px; border-top: 1px solid #eee; padding-top: 16px;">
+            VeilCode Agency<br>
+            Building purposeful digital experiences<br>
+            <a href="https://youragency.com" style="color: #0066cc; text-decoration: none;">youragency.com</a>
+          </p>
+        </div>
+    `
+}
+
+// lead confirmation email to the admin
+export const adminLeadConfirmationTemplate = async ({name, email, company, service, budget, timeline, message}: ContactFormProps) => {
+    return `
+    <div style="font-family: system-ui, sans-serif; max-width: 600px; margin: 0 auto; padding: 32px 20px;">
+          <h1 style="color: #111; font-size: 24px;">New Enquiry Received</h1>
+          <p style="color: #555; margin: 16px 0;">
+            <strong>From:</strong> ${name} <${email}>
+          </p>
+          ${company ? `<p><strong>Company:</strong> ${company}</p>` : ""}
+          <p><strong>Service:</strong> ${service}</p>
+          ${budget ? `<p><strong>Budget:</strong> ${budget}</p>` : ""}
+          ${timeline ? `<p><strong>Timeline:</strong> ${timeline}</p>` : ""}
+          <div style="background: #f8f9fa; border-radius: 8px; padding: 20px; margin: 24px 0;">
+            <h3 style="margin: 0 0 12px; color: #333;">Message:</h3>
+            <p style="margin: 0; white-space: pre-wrap; color: #444;">${message}</p>
+          </div>
+          <p style="color: #777; font-size: 14px; margin-top: 32px;">
+            View full details in admin dashboard or reply directly to this email.
+          </p>
+        </div>
+    `
+}
+

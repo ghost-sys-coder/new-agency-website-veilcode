@@ -27,7 +27,6 @@ function DesktopNavLink({ label, href }: { label: string; href: string }) {
   );
 }
 
-/* ─── HAMBURGER BUTTON ────────────────────────────────────────────────────── */
 
 function HamburgerButton({
   open,

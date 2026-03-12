@@ -71,7 +71,7 @@ export function CTA() {
               className="flex flex-wrap justify-center gap-4"
             >
               <PrimaryButton className="text-[15px]! px-9! py-4!">
-                Book a Discovery Call →
+                <Link href={"/start"}>Book a Discovery Call →</Link>
               </PrimaryButton>
               <PrimaryButton className="text-[15px]! px-9! py-4!">
                 <Link href={"/services/#pricing"}>View Pricing</Link>

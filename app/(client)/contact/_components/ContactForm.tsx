@@ -4,29 +4,29 @@ import { useState, type ChangeEvent, type SyntheticEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { PrimaryButton } from "@/components/extras/Primitives";
 import { fadeUp, stagger, useReveal } from "@/lib/motion";
+import { toast } from "sonner";
+import axios from "axios";
 
-/* ─── TYPES ───────────────────────────────────────────────────────────────── */
 
 interface FormData {
-  name:       string;
-  email:      string;
-  company:    string;
-  service:    string;
-  budget:     string;
-  timeline:   string;
-  message:    string;
+  name: string;
+  email: string;
+  company: string;
+  service: string;
+  budget: string;
+  timeline: string;
+  message: string;
 }
 
 interface FormErrors {
-  name?:    string;
-  email?:   string;
+  name?: string;
+  email?: string;
   service?: string;
   message?: string;
 }
 
 type SubmitState = "idle" | "loading" | "success" | "error";
 
-/* ─── OPTIONS ─────────────────────────────────────────────────────────────── */
 
 const SERVICES = [
   "Web Solutions (Design & Development)",
@@ -39,11 +39,12 @@ const SERVICES = [
 ] as const;
 
 const BUDGETS = [
-  "Under $2,500",
-  "$2,500 – $8,000",
-  "$8,000 – $25,000",
-  "$25,000 – $60,000",
-  "$60,000+",
+  "Under $1,500",
+  "$1,500 – $5,000",
+  "$5,000 – $15,000",
+  "$15,000 – $30,000",
+  "$30,000 - $60,000",
+  "$60,000",
   "Let's Discuss",
 ] as const;
 
@@ -55,7 +56,6 @@ const TIMELINES = [
   "Just exploring for now",
 ] as const;
 
-/* ─── INPUT PRIMITIVES ────────────────────────────────────────────────────── */
 
 const inputBase =
   "w-full bg-surface-hi border border-line rounded-lg px-4 py-3.5 \
@@ -108,7 +108,6 @@ function FieldError({ message }: { message?: string }) {
   );
 }
 
-/* ─── PILL SELECTOR ───────────────────────────────────────────────────────── */
 
 function PillSelector<T extends string>({
   id,
@@ -117,11 +116,11 @@ function PillSelector<T extends string>({
   onChange,
   error,
 }: {
-  id:       string;
-  options:  readonly T[];
-  value:    string;
+  id: string;
+  options: readonly T[];
+  value: string;
   onChange: (val: T) => void;
-  error?:   string;
+  error?: string;
 }) {
   return (
     <div>
@@ -139,10 +138,9 @@ function PillSelector<T extends string>({
               transition-all duration-150 cursor-pointer outline-none
               focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2
               focus-visible:ring-offset-base
-              ${
-                value === opt
-                  ? "bg-brand-dim border-brand-border text-brand"
-                  : "bg-surface-hi border-line text-ink-muted hover:border-line-hi hover:text-ink"
+              ${value === opt
+                ? "bg-brand-dim border-brand-border text-brand"
+                : "bg-surface-hi border-line text-ink-muted hover:border-line-hi hover:text-ink"
               }`}
           >
             {opt}
@@ -154,24 +152,22 @@ function PillSelector<T extends string>({
   );
 }
 
-/* ─── VALIDATION ──────────────────────────────────────────────────────────── */
 
 function validate(data: FormData): FormErrors {
   const errors: FormErrors = {};
-  if (!data.name.trim())         errors.name    = "Your name is required.";
-  if (!data.email.trim())        errors.email   = "Your email address is required.";
+  if (!data.name.trim()) errors.name = "Your name is required.";
+  if (!data.email.trim()) errors.email = "Your email address is required.";
   else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email))
-                                 errors.email   = "Please enter a valid email address.";
-  if (!data.service)             errors.service = "Please select a service.";
-  if (!data.message.trim())      errors.message = "Please tell us a little about your project.";
+    errors.email = "Please enter a valid email address.";
+  if (!data.service) errors.service = "Please select a service.";
+  if (!data.message.trim()) errors.message = "Please tell us a little about your project.";
   else if (data.message.trim().length < 20)
-                                 errors.message = "Please provide a bit more detail (20+ characters).";
+    errors.message = "Please provide a bit more detail (20+ characters).";
   return errors;
 }
 
-/* ─── SUCCESS STATE ───────────────────────────────────────────────────────── */
 
-function SuccessMessage() {
+function SuccessMessage({ onReset }: { onReset: () => void }) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.96 }}
@@ -179,7 +175,6 @@ function SuccessMessage() {
       transition={{ duration: 0.4 }}
       className="flex flex-col items-center text-center py-16 px-8"
     >
-      {/* Checkmark */}
       <div className="size-16 rounded-full bg-brand-dim border border-brand-border
         flex items-center justify-center mb-6">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -198,20 +193,16 @@ function SuccessMessage() {
       <h3 className="font-display text-2xl font-bold tracking-tight text-ink mb-3">
         Message Received!
       </h3>
-      <p className="font-sans text-sm text-ink-muted leading-relaxed max-w-90">
-        Thank you for reaching out. We&apos;ve received your message and will get
-        back to you within one business day.
+      <p className="font-sans text-sm text-ink-muted leading-relaxed max-w-90 mb-8">
+        Thank you for reaching out. We&apos;ll get back to you within one business day.
       </p>
-      <div className="mt-6 font-mono text-[11px] tracking-widest uppercase
-        text-brand bg-brand-dim border border-brand-border
-        px-4 py-2 rounded-md">
-        Check your inbox for a confirmation
-      </div>
+      <PrimaryButton onClick={onReset} className="px-8 py-3">
+        Send Another Message
+      </PrimaryButton>
     </motion.div>
   );
 }
 
-/* ─── CONTACT FORM ────────────────────────────────────────────────────────── */
 
 const EMPTY: FormData = {
   name: "", email: "", company: "",
@@ -219,8 +210,8 @@ const EMPTY: FormData = {
 };
 
 export function ContactForm() {
-  const [formData,   setFormData]   = useState<FormData>(EMPTY);
-  const [errors,     setErrors]     = useState<FormErrors>({});
+  const [formData, setFormData] = useState<FormData>(EMPTY);
+  const [errors, setErrors] = useState<FormErrors>({});
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
   const [ref, inView] = useReveal();
 
@@ -239,6 +230,12 @@ export function ContactForm() {
     if (errors.service) setErrors((prev) => ({ ...prev, service: undefined }));
   }
 
+  const resetForm = () => {
+    setFormData(EMPTY);
+    setErrors({});
+    setSubmitState("idle");
+  };
+
   async function handleSubmit(e: SyntheticEvent) {
     e.preventDefault();
     const newErrors = validate(formData);
@@ -247,19 +244,30 @@ export function ContactForm() {
       return;
     }
     setSubmitState("loading");
-    // Simulate API call — replace with your real endpoint
-    await new Promise((r) => setTimeout(r, 1600));
-    setSubmitState("success");
+    
+    try {
+      const { status, data } = await axios.post("/api/messages", formData);
+
+      if (status === 201 && data?.success) {
+        setSubmitState("success");
+        setFormData(EMPTY);
+        toast.success(data?.message || "Check your email!");
+      }
+    } catch (error) {
+      console.log("Something went wrong!", error);
+      toast.error((error as Error).message || "Something went wrong! Try again!");
+    }
   }
 
   return (
     <div
       ref={ref}
       className="lg:col-span-7"
+      id="form-message"
     >
       <motion.div
         variants={stagger}
-        initial="hidden"
+        // initial="hidden"
         animate={inView ? "visible" : "hidden"}
         className="bg-surface border border-line rounded-2xl overflow-hidden"
       >
@@ -276,7 +284,7 @@ export function ContactForm() {
 
         <AnimatePresence mode="wait">
           {submitState === "success" ? (
-            <SuccessMessage key="success" />
+            <SuccessMessage key="success" onReset={resetForm} />
           ) : (
             <motion.form
               key="form"
@@ -296,7 +304,7 @@ export function ContactForm() {
                     name="name"
                     type="text"
                     autoComplete="name"
-                    placeholder="David Kabugo"
+                    placeholder="John Doe"
                     value={formData.name}
                     onChange={handleChange}
                     className={`${inputBase} ${errors.name ? inputError : ""}`}
@@ -327,7 +335,7 @@ export function ContactForm() {
                   name="company"
                   type="text"
                   autoComplete="organization"
-                  placeholder="Acme Corp (optional)"
+                  placeholder="VeilCode Studio (optional)"
                   value={formData.company}
                   onChange={handleChange}
                   className={inputBase}
@@ -384,9 +392,8 @@ export function ContactForm() {
                   placeholder="Give us a sense of what you're building, what problem you're solving, or what outcome you're hoping for. The more context, the better."
                   value={formData.message}
                   onChange={handleChange}
-                  className={`${inputBase} resize-none ${
-                    errors.message ? inputError : ""
-                  }`}
+                  className={`${inputBase} resize-none ${errors.message ? inputError : ""
+                    }`}
                 />
                 <div className="flex items-start justify-between mt-1">
                   <FieldError message={errors.message} />
