@@ -79,8 +79,31 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Veilcode",
+    "url": "https://veilcode.studio",
+    "logo": "https://veilcode.studio/assets/logo.png",
+    "founder": {
+      "@type": "Person",
+      "name": "Frank Tamale"
+    },
+    "sameAs": [
+      "https://facebook.com/veilcode",
+      "https://instagram.com/veilcodestudio"
+    ],
+  };
+
+
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLd)}}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
