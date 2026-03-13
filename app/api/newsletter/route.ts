@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
         const confirmUrl = `${process.env.FRONTEND_URL}/api/newsletter/confirm?token=${confirmToken}`;
 
         const { error } = await resend.emails.send({
-            from: "VeilCode <onboarding@resend.dev>",
+            from: "VeilCode <hello@veilcode.studio>",
             to: email,
             subject: "Confirm your VeilCode Newsletter subscription",
             html: await clientEmailTemplate(confirmUrl)
