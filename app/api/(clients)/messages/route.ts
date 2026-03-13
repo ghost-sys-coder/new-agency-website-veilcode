@@ -48,7 +48,7 @@ export async function POST(req: NextRequest) {
         // send a lead email to the admin
         const { error: adminError } = await resend.emails.send({
             from: "VeilCode <hello@veilcode.studio>",
-            to: ["juniorbeast177@gmail.com"],
+            to: ["juniorbeast177@gmail.com", "ecommercedock@gmail.com"],
             subject: `New Project Enquiry from ${name}`,
             html: await adminLeadConfirmationTemplate({ name, service, budget, timeline, company, email, message })
         });
