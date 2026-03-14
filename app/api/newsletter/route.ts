@@ -3,7 +3,7 @@ import crypto from "crypto";
 import { db } from "@/db/drizzle";
 import { newsletterSubscriptionTable } from "@/db/schema";
 import { eq } from "drizzle-orm";
-import { clientEmailTemplate } from "@/lib/template";
+import { clientNewsletterConfirmationTemplate } from "@/lib/template";
 import { resend } from "@/lib/resend";
 
 export async function POST(req: NextRequest) {
@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
             from: "VeilCode <hello@veilcode.studio>",
             to: email,
             subject: "Confirm your VeilCode Newsletter subscription",
-            html: await clientEmailTemplate(confirmUrl)
+            html: await clientNewsletterConfirmationTemplate(confirmUrl)
         });
 
         if (error) {

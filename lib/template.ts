@@ -199,7 +199,7 @@ export const adminLeadConfirmationTemplate = async ({
 };
 
 
-export const clientEmailTemplate = async (confirmUrl: string) => {
+export const clientNewsletterConfirmationTemplate = async (confirmUrl: string) => {
   return `
     <!DOCTYPE html>
                 <html>

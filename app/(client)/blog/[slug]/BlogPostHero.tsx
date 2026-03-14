@@ -5,6 +5,7 @@ import { GridBg, GlowOrb, SectionTag, AccentLine } from "@/components/extras/Pri
 import { fadeUp, stagger } from "@/lib/motion";
 import { formatDate, type BlogPost } from "@/constants/blog";
 import Image from "next/image";
+import Link from "next/link";
 
 /* ─── HERO IMAGE PLACEHOLDER ──────────────────────────────────────────────── */
 
@@ -79,11 +80,11 @@ export function BlogPostHero({ post: p }: { post: BlogPost }) {
 
           {/* Breadcrumb */}
           <motion.div variants={fadeUp(0)} className="flex items-center gap-2 mb-8">
-            <a href="/blog"
+            <Link href="/blog"
               className="font-mono text-[11px] tracking-widest uppercase
                 text-ink-faint hover:text-ink transition-colors duration-200 no-underline">
               Blog
-            </a>
+            </Link>
             <span className="text-ink-faint" aria-hidden>/</span>
             <span className={`font-mono text-[11px] tracking-widest uppercase ${c.accent}`}>
               {p.category}
